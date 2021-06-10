@@ -1,18 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Arrays;
 
 public class VisualPanel extends JPanel {
 
     Numbers numbers = new Numbers();
     int[] sortedArray;
-    public Boolean sorting = false;
+    int numToFind = 0;
 
     public VisualPanel() {
-        setSize(new Dimension(350, 300));
-        setLocation(0, 50);
+        setSize(new Dimension(350, 280));
+        setLocation(0, 70);
         setBackground(new Color(132, 159, 219));
 
         init();
@@ -22,28 +20,16 @@ public class VisualPanel extends JPanel {
         numbers.addNumbers();
         generateArray();
         System.out.println(Arrays.toString(sortedArray));
-
-        addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent keyEvent) {
-            }
-
-            @Override
-            public void keyPressed(KeyEvent keyEvent) {
-                System.out.println("lksdjf");
-            }
-
-            @Override
-            public void keyReleased(KeyEvent keyEvent) {
-
-            }
-        });
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         renderBars(g);
+
+        if(numToFind > 0) {
+            paintBar(g);
+        }
     }
 
     private void renderBars(Graphics g) {
@@ -52,14 +38,26 @@ public class VisualPanel extends JPanel {
         int pos = 0;
         for(int i = 0; i < 54; i++) {
             pos = pos + 6;
-            g.drawRect(pos, (200-sortedArray[i]) + 50, 4, sortedArray[i]);
-            g.fillRect(pos, (200-sortedArray[i]) + 50, 4, sortedArray[i]);
+            g.drawRect(pos, (180-sortedArray[i]) + 50, 4, sortedArray[i]);
+            g.fillRect(pos, (180-sortedArray[i]) + 50, 4, sortedArray[i]);
+        }
+    }
+
+    private void paintBar(Graphics g) {
+
+        g.setColor(Color.GREEN);
+
+        int pos = 0;
+        for(int i = 0; i < 54; i++) {
+            pos = pos + 6;
+            if(sortedArray[i] == numToFind) {
+                g.drawRect(pos, (180 - sortedArray[i]) + 50, 4, sortedArray[i]);
+                g.fillRect(pos, (180 - sortedArray[i]) + 50, 4, sortedArray[i]);
+            }
         }
     }
 
     public void generateArray() {
-//        int[] tempArray = new int[numbers.printNumbers().length];
-//        tempArray = numbers.printNumbers();
         sortedArray = numbers.printNumbers();
     }
 
@@ -76,5 +74,38 @@ public class VisualPanel extends JPanel {
             }
         }
         System.out.println("Finished sorting: " + Arrays.toString(sortedArray));
+    }
+
+    public void sort2() {
+        int[] sortedArray2 = sortedArray;
+        for(int i = 0; i < sortedArray.length; i++) {
+            for(int j = i; j < sortedArray.length; j++) {
+                if(sortedArray2[j] < sortedArray2[i]) {
+                    int temp = sortedArray2[j];
+                    for(int x = j; x > i; x--) {
+                        sortedArray2[x] = sortedArray2[x-1];
+                    }
+                    sortedArray2[i] = temp;
+                    return;
+                }
+            }
+        }
+    }
+
+    public void findMax() {
+        for(int number:sortedArray) {
+            if(number > numToFind) {
+                numToFind = number;
+            }
+        }
+    }
+
+    public void findMin() {
+        numToFind = sortedArray[0];
+        for(int number:sortedArray) {
+            if(number < numToFind) {
+                numToFind = number;
+            }
+        }
     }
 }

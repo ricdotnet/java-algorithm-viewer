@@ -3,18 +3,20 @@ import java.util.Arrays;
 public class Numbers {
 
     private static final int[] numbers = new int[54];
+//    private static final int[] numbers = new int[10];
 
-//    public static void main(String args[]) {
-//
-//        Numbers numbers = new Numbers();
-//
-//        numbers.addNumbers();
-//        System.out.println(Arrays.toString(numbers.printNumbers()));
-//
-////        numbers.findMax();
-////        numbers.findMin();
+    public static void main(String args[]) {
+
+        Numbers numbers = new Numbers();
+
+        numbers.addNumbers();
+        System.out.println(Arrays.toString(numbers.printNumbers()));
+
+//        numbers.findMax();
+//        numbers.findMin();
 //        numbers.sort();
-//    }
+        numbers.sort2();
+    }
 
     public int[] printNumbers() {
         return numbers;
@@ -24,6 +26,9 @@ public class Numbers {
         for(int i = 0; i < 54; i++) {
             numbers[i] = (int) Math.ceil(Math.random() * 200);
         }
+//        for(int i = 0; i < 10; i++) {
+//            numbers[i] = (int) Math.ceil(Math.random() * 25);
+//        }
     }
 
     public int printNumber(int index) {
@@ -73,4 +78,27 @@ public class Numbers {
         System.out.println("Finished sorting: " + Arrays.toString(tempArray));
     }
 
+    public void sort2() {
+        int[] sortedArray = numbers; //initialize the temporary array to be sorted
+
+        for(int i = 0; i < numbers.length; i++) { //number of steps to loop depending on array size
+
+            for(int j = i; j < numbers.length; j++) { //sub loop to loop through each number to find a smaller one
+
+                if(sortedArray[j] < sortedArray[i]) { //if a number is smaller than the main number (loop i) then move it to i
+
+                    int temp = sortedArray[j]; //first store the number on a temporary int
+
+                    for(int x = j; x > i; x--) { //another last loop to shift all other numbers one case to the right
+
+                        sortedArray[x] = sortedArray[x-1]; //set the left number to the right case
+                    }
+
+                    sortedArray[i] = temp; //set the temp number to the i position
+                }
+            }
+        }
+
+        System.out.println(Arrays.toString(sortedArray));
+    }
 }
