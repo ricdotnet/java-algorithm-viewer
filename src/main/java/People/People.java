@@ -8,14 +8,16 @@ public class People {
 
     private List<Person> peopleList = new ArrayList<Person>();
 
-    public People() {}
+    public People() { }
     static People people = new People();
 
     public static void main(String args[]) {
         people.generatePeople();
 //        System.out.println(people.printPeopleList());
-//        people.sortPeopleByAge();
-        people.sortPeopleAlphabetical();
+        people.sortPeopleByAge();
+//        people.sortPeopleAlphabetical();
+        people.addPerson();
+        people.printNotSorted();
     }
 
     private void generatePeople() {
@@ -41,11 +43,26 @@ public class People {
         peopleList.add(new Person("Jose", 11, "Portugal"));
     }
 
+    public void printNotSorted() {
+        for(Person person:peopleList) {
+            System.out.println(person.getName() + ", " + person.getAge() + ", from " + person.getCountry());
+        }
+    }
+    public void addPerson() {
+        Person newPerson = new Person("Teste", 26, "Teste");
+        for(int i = 0; i < peopleList.size(); i++) {
+            if(peopleList.get(i).getAge() > newPerson.getAge()) {
+                peopleList.add(i, newPerson);
+                break;
+            }
+        }
+    }
+
     private List<Person> printPeopleList() {
         return peopleList;
     }
 
-    private void sortPeopleByAge() {
+    public void sortPeopleByAge() {
         List<Person> tempList = peopleList;
 
         for(int i = 0; i < peopleList.size(); i++) {
