@@ -17,7 +17,7 @@ public class Visual extends JFrame {
 
     static int typeOfSort = 0;
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         visual.init();
     }
 
