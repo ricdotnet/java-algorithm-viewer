@@ -108,4 +108,15 @@ public class VisualPanel extends JPanel {
             }
         }
     }
+
+    public boolean isSorted() {
+
+        for (int i = 0; i < sortedArray.length - 1; i++) {
+            if (sortedArray[i] > sortedArray[i + 1]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

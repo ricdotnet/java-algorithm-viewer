@@ -12,8 +12,8 @@ public class Numbers {
         numbers.addNumbers();
         System.out.println(Arrays.toString(numbers.printNumbers()));
 
-//        numbers.findMax();
-//        numbers.findMin();
+        numbers.findMax();
+        numbers.findMin();
 //        numbers.sort();
         numbers.sort2();
     }
@@ -26,9 +26,6 @@ public class Numbers {
         for(int i = 0; i < 54; i++) {
             numbers[i] = (int) Math.ceil(Math.random() * 200);
         }
-//        for(int i = 0; i < 10; i++) {
-//            numbers[i] = (int) Math.ceil(Math.random() * 25);
-//        }
     }
 
     public int printNumber(int index) {

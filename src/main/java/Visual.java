@@ -54,12 +54,13 @@ public class Visual extends JFrame {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                visualPanel.repaint();
+
                 if(typeOfSort == 0) {
                     visualPanel.sort();
                 } else if(typeOfSort == 1) {
                     visualPanel.sort2();
                 }
-                visualPanel.repaint();
             }
         });
         resetButton.addActionListener(new ActionListener() {
